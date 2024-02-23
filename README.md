@@ -32,11 +32,13 @@ code>;
 
 #### Documentação 1 (Swagger)
 
-![alt text](./preview/swagger.png)
+![alt text](![image](https://github.com/rdiegoss/ozmap_test/assets/10976074/17950116-3198-4838-8bd7-5d8a84d0da8b)
+)
 
 #### Cobertura de testes
 
-![alt text](./preview/coverage.png)
+![alt text](![image](https://github.com/rdiegoss/ozmap_test/assets/10976074/7934f365-1827-4338-b4db-4df51ca3b87d)
+)
 
 # OZmap Challenge: Construindo a Geolocalização do Futuro
 
