@@ -1,0 +1,436 @@
+{
+	"info": {
+		"_postman_id": "81b6859f-102e-4e57-979f-6228485d551c",
+		"name": "ozmap-challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29597453"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Antonio Carlos\",\r\n  \"email\": \"antoniocarlos@gmail.com\",\r\n  \"coordinates\": {\r\n    \"lng\": -46.57421,\r\n    \"lat\": -21.785741\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/users?page=1&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/users/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "655d01de1d70a5ba932015bd"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/users/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "655d02991d70a5ba932015cb"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Antonio Carlos\",\r\n    \"email\": \"antonio2@gmail.com\",\r\n    \"coordinates\": {\r\n        \"lng\": -48.6364360,\r\n        \"lat\": -26.9989906\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/users/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "655d01de1d70a5ba932015bd"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Regions",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Teste Regiao I\",\r\n    \"coordinates\": {\r\n        \"lat\": -26.99894740,\r\n        \"lng\": -48.63636900\r\n    },\r\n    \"user\": \"655d01de1d70a5ba932015bd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/regions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"regions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/regions?page=1&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"regions"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/regions/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"regions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "655d03201d70a5ba932015d6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteRegion",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/regions/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"regions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "655d03201d70a5ba932015d6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Teste Regiao I\",\r\n    \"coordinates\": {\r\n        \"lng\": -48.636369,\r\n        \"lat\": -26.9989474\r\n    },\r\n    \"user\": \"655d036a1d70a5ba932015e3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/regions/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"regions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "655d03201d70a5ba932015d6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRegionBySpecificPoint",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/regions/:lng/:lat",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"regions",
+								":lng",
+								":lat"
+							],
+							"query": [
+								{
+									"key": "lng",
+									"value": "150",
+									"disabled": true
+								},
+								{
+									"key": "lat",
+									"value": "50",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "lng",
+									"value": "-26.99894740"
+								},
+								{
+									"key": "lat",
+									"value": "-48.63636900"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRegionByDistance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/regions/distance?lng=-48.63636900&lat=-26.99894740&distance=1000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"regions",
+								"distance"
+							],
+							"query": [
+								{
+									"key": "lng",
+									"value": "-48.63636900"
+								},
+								{
+									"key": "lat",
+									"value": "-26.99894740"
+								},
+								{
+									"key": "distance",
+									"value": "1000000"
+								},
+								{
+									"key": "user",
+									"value": "655bdb8842f11cb9ecafae0f",
+									"description": "Filter by user id\n",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Export",
+			"item": [
+				{
+					"name": "exportUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/export/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"export",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "exportRegions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/export/regions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"export",
+								"regions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

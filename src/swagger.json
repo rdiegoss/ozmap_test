@@ -1,0 +1,1383 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "OZmap API",
+    "description": "RESTful API",
+    "version": "1.0.0",
+    "contact": {
+      "email": "rdiegoss@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get all users",
+        "description": "Get all users.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Pages",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Pages",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Users successfully obtained",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Users successfully obtained"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": ""
+                      }
+                    },
+                    "page": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "limit": {
+                      "type": "number",
+                      "example": 10
+                    },
+                    "total": {
+                      "type": "number",
+                      "example": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "There are no registered users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "There are no registered users in this range"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create a new user",
+        "description": "Create a new user",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "string",
+            "email": "string",
+            "address": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User created successfully"
+                    },
+                    "data": {
+                      "$ref": ""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Address or coordinates not provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Address or coordinates required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422.1": {
+            "description": "Body request field validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid email format"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422.3": {
+            "description": "Address and coordinates entered at the same time",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Enter only address or coordinates"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422.4": {
+            "description": "Invalid coordinate format",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Enter coordinates with latitude and longitude in numeric format"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422.5": {
+            "description": "Email already registered in the system",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Email already registered"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get a user by id",
+        "description": "Returns a user",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Users successfully obtained",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Users successfully obtained"
+                    },
+                    "data": {
+                      "$ref": ""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "No users were found with the id 655c209168c8896d34d0b05d"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update a user by id",
+        "description": "Update a user",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User updated successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No user registered with the id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "No users were found with the id 655c209168c8896d34d0b05d"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Address or coordinates not provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Address or coordinates required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422.1": {
+            "description": "Body request field validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid email format"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422.2": {
+            "description": "Address and coordinates entered at the same time",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Enter only address or coordinates"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422.3": {
+            "description": "Invalid coordinate format",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Enter coordinates with latitude and longitude in numeric format"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Deletes a user by id",
+        "description": "Deletes a user",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User deleted successfully"
+          },
+          "404": {
+            "description": "No user registered with the id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "No users were found with the id 655c209168c8896d34d0b05d"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/regions": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "summary": "List all regions",
+        "description": "Lists all regions registered in the system.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Page number",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of items per page",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully obtained regions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully obtained regions"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": ""
+                      }
+                    },
+                    "page": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "limit": {
+                      "type": "number",
+                      "example": 10
+                    },
+                    "total": {
+                      "type": "number",
+                      "example": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "There is no region registered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "example": "There is no region registered in this range"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Regions"
+        ],
+        "summary": "Create a new region",
+        "description": "Creates a new region in the system",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Region created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Region created successfully"
+                    },
+                    "data": {
+                      "$ref": ""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "No users were found with this id"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Body request field validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid email format"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422.1": {
+            "description": "Invalid coordinate format",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Enter coordinates with latitude and longitude in numeric format"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422.2": {
+            "description": "Region already registered in the system",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "This region is already registered"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/regions/{id}": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "summary": "Get a region by id",
+        "description": "Returns a region",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Region ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully obtained regions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully obtained regions"
+                    },
+                    "data": {
+                      "$ref": ""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Region not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "No region was found with id 655c209168c8896d34d0b05d"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Regions"
+        ],
+        "summary": "Update a region by id",
+        "description": "Update a region",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Region ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Region updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Region updated successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No region registered with the id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "No region was found with id 655c209168c8896d34d0b05d"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Body request field validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid email format"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422.1": {
+            "description": "Invalid coordinate format",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Enter coordinates with latitude and longitude in numeric format"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422.2": {
+            "description": "Updating the region with an invalid user id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Enter a valid user id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Regions"
+        ],
+        "summary": "Deletes a region by id",
+        "description": "Deletes a region",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Region ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Region deleted successfully"
+          },
+          "404": {
+            "description": "No region registered with the id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "No region was found with id 655c209168c8896d34d0b05d"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/regions/{lng}/{lat}": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "summary": "Sort the regions in the order of proximity to the given coordinates",
+        "description": "Returns all regions sorted by proximity to the given coordinates",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lng",
+            "description": "Longitude",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "path",
+            "name": "lat",
+            "description": "Latitude",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully obtained regions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully obtained regions"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": ""
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/regions/distance": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "summary": "Gets regions within a radius of distance",
+        "description": "Return regions within a radius of the entered coordinates and can also filter them by user",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "lng",
+            "description": "Reference point longitude",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "lat",
+            "description": "Reference point latitude",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "distance",
+            "description": "Maximum distance in meters",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "user",
+            "description": "User ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully obtained regions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully obtained regions"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": ""
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No region found within the given distance radius",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "No regions were found within this radius"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404.1": {
+            "description": "No users found to perform filtering",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "No region belongs to this user"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/export/users": {
+      "get": {
+        "tags": [
+          "Export"
+        ],
+        "summary": "Export users",
+        "description": "Export users in CSV format",
+        "produces": [
+          "text/csv"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully exported users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully exported users"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No users found to export",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unable to export as there are no registered users"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error when exporting",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unexpected error when mounting file"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/export/regions": {
+      "get": {
+        "tags": [
+          "Export"
+        ],
+        "summary": "Export regions",
+        "description": "Export regions in CSV format",
+        "produces": [
+          "text/csv"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully exported regions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully exported regions"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No regions found to export",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unable to export as there are no regions registered"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error when exporting",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unexpected error when mounting file"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "enum": [
+                "longitude",
+                "latitude"
+              ]
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "__v": {
+            "type": "integer"
+          }
+        }
+      },
+      "UserCreateUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Antonio Carlos"
+          },
+          "email": {
+            "type": "string",
+            "example": "antoniocarlos@gmail.com",
+            "format": "email"
+          }
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "coordinates": {
+                "type": "object",
+                "properties": {
+                  "lng": {
+                    "type": "number",
+                    "example": -46.57421,
+                    "required": true
+                  },
+                  "lat": {
+                    "type": "number",
+                    "example": -21.785741,
+                    "required": true
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "address": {
+                "type": "object",
+                "properties": {
+                  "street": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "number": {
+                    "type": "string"
+                  },
+                  "neighborhood": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "zipCode": {
+                    "type": "string",
+                    "required": true,
+                    "example": "87115228"
+                  },
+                  "city": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "state": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "country": {
+                    "type": "string",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "required": [
+          "name",
+          "email"
+        ]
+      },
+      "Region": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "enum": [
+                "longitude",
+                "latitude"
+              ],
+              "example": [
+                -46.57421,
+                -21.785741
+              ]
+            }
+          },
+          "user": {
+            "type": "string",
+            "description": "ID of the user who created the region",
+            "example": "5f9c0e9b1c9d440000d1b3d1"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "__v": {
+            "type": "integer"
+          }
+        }
+      },
+      "RegionCreateUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Region 1"
+          },
+          "coordinates": {
+            "type": "object",
+            "properties": {
+              "lng": {
+                "type": "number",
+                "example": -46.57421,
+                "required": true
+              },
+              "lat": {
+                "type": "number",
+                "example": -21.785741,
+                "required": true
+              }
+            }
+          },
+          "user": {
+            "type": "string",
+            "description": "ID of the user who created the region",
+            "example": "5f9c0e9b1c9d440000d1b3d1"
+          }
+        },
+        "required": [
+          "name",
+          "coordinates",
+          "user"
+        ]
+      },
+      "RegionPopulated": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "enum": [
+                "longitude",
+                "latitude"
+              ],
+              "example": [
+                -46.57421,
+                -21.785741
+              ]
+            }
+          },
+          "user": {
+            "$ref": ""
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "__v": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}
